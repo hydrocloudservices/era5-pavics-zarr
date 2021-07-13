@@ -129,25 +129,23 @@ if __name__ == '__main__':
     executor = DaskExecutor(address=client.scheduler.address)
     with Flow("ERA5-ETL") as flow:
         variable = Parameter('variable')
-        # idx = Parameter('idx')
+        idx = Parameter('idx')
         filenames = list_all_files_to_fetch(variable)
 
         netcdf_path = save_unique_variable_date_file.map(filenames)
-        # zarr_path = create_current_zarr_dataset(variable, netcdf_path[0])
-        # target_store = chunk_zarr_dataset(variable, zarr_path)
-        # store_variable(variable, target_store, idx)
+        zarr_path = create_current_zarr_dataset(variable, netcdf_path[0])
+        target_store = chunk_zarr_dataset(variable, zarr_path)
+        store_variable(variable, target_store, idx)
 
     for idx, var in enumerate(list(Config.VARIABLES.values())):
         print(var)
-        # flow.run(executor=executor,
-        #          parameters=dict(variable=var,
-        #                          idx=idx))
         flow.run(executor=executor,
-                 parameters=dict(variable=var))
-    # fs = fsspec.filesystem('s3', **Config.STORAGE_OPTIONS)
-    # store = fsspec.get_mapper(Config.BUCKET_ZARR_CURENT,
-    #                           profile=Config.PROFILE,
-    #                           client_kwargs=Config.CLIENT_KWARGS)
-    # zarr.consolidate_metadata(store)
+                 parameters=dict(variable=var,
+                                 idx=idx))
+    fs = fsspec.filesystem('s3', **Config.STORAGE_OPTIONS)
+    store = fsspec.get_mapper(Config.BUCKET_ZARR_CURENT,
+                              profile=Config.PROFILE,
+                              client_kwargs=Config.CLIENT_KWARGS)
+    zarr.consolidate_metadata(store)
 
 
