@@ -115,7 +115,7 @@ def store_variable(variable, store, idx):
     #        target_store,
     #        recursive=True)
 
-    command = "aws2 s3 sync {} {} " \
+    command = "aws s3 sync {} {} " \
               "--endpoint-url={} --region={} --profile={}".format(input_store,
                                                                   target_store,
                                                                   Config.CLIENT_KWARGS['endpoint_url'],

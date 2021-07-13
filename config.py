@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import os
 
 END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=5))
 
@@ -6,7 +7,7 @@ END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=5))
 class Config(object):
     # Bucket configuration
     BUCKET = 's3://era5/world/reanalysis/single-levels/netcdf'
-    BUCKET_ZARR_CURENT = 's3://era5/world/reanalysis/single-levels/zarr-time-cache/current-test7'
+
     CLIENT_KWARGS = {'endpoint_url': 'https://s3.wasabisys.com',
                      'region_name': 'us-east-1'}
     CONFIG_KWARGS = {'max_pool_connections': 30}
@@ -24,6 +25,7 @@ class Config(object):
     END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=5))
     print(END_DATE_DATETIME)
     END_DATE = END_DATE_DATETIME.strftime('%Y-%m-%d')
+    BUCKET_ZARR_CURENT = os.path.join('s3://era5/world/reanalysis/single-levels/zarr-time-cache', END_DATE)
 
     print(DATETIME_NOW)
     start_dates = []
