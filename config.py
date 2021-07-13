@@ -10,7 +10,7 @@ class Config(object):
 
     CLIENT_KWARGS = {'endpoint_url': 'https://s3.wasabisys.com',
                      'region_name': 'us-east-1'}
-    CONFIG_KWARGS = {'max_pool_connections': 30}
+    CONFIG_KWARGS = {'max_pool_connections': 100}
     PROFILE = 'default'
 
     STORAGE_OPTIONS = {'profile': PROFILE,
@@ -22,7 +22,7 @@ class Config(object):
     BATCH_IMPORT_DAYS = ['05Jan', '05Apr','05Jul','05Oct']
 
     DATETIME_NOW = datetime.utcnow()
-    END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=5))
+    END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=6))
     print(END_DATE_DATETIME)
     END_DATE = END_DATE_DATETIME.strftime('%Y-%m-%d')
     BUCKET_ZARR_CURENT = os.path.join('s3://era5/world/reanalysis/single-levels/zarr-time-cache', END_DATE)
