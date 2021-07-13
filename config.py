@@ -10,7 +10,7 @@ class Config(object):
     CLIENT_KWARGS = {'endpoint_url': 'https://s3.wasabisys.com',
                      'region_name': 'us-east-1'}
     CONFIG_KWARGS = {'max_pool_connections': 30}
-    PROFILE = 'aws'
+    PROFILE = 'default'
 
     STORAGE_OPTIONS = {'profile': PROFILE,
                        'client_kwargs': CLIENT_KWARGS,
