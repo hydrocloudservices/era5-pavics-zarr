@@ -2,7 +2,7 @@ name: DataOps
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '30 2 * * *'
 
 jobs:
   run:
