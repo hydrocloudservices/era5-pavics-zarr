@@ -19,7 +19,7 @@ class Config(object):
                        }
 
     # Dataset
-    BATCH_IMPORT_DAYS = ['05Jan', '05Apr','05Jul','05Oct']
+    BATCH_IMPORT_DAYS = ['06Jan', '06Apr','06Jul','06Oct']
 
     DATETIME_NOW = datetime.utcnow()
     END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=6))
