@@ -34,10 +34,10 @@ class Config(object):
         if date > DATETIME_NOW:
             date = date.replace(year=date.year - 1)
         start_dates.append(date)
-    dates_list = [10000 if i <= 0 else i for i in [(END_DATE_DATETIME - (start_date - timedelta(days=5))).days
+    dates_list = [10000 if i <= 0 else i for i in [(END_DATE_DATETIME - (start_date - timedelta(days=6))).days
                                                    for start_date in start_dates]]
     index = dates_list.index(min(dates_list))
-    START_DATE_ZARR = (start_dates[index] - timedelta(days=4)).strftime('%Y-%m-%d')
+    START_DATE_ZARR = (start_dates[index] - timedelta(days=5)).strftime('%Y-%m-%d')
     print(START_DATE_ZARR)
     print(END_DATE)
 
