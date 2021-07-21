@@ -3,6 +3,8 @@ from dask.distributed import Client
 from prefect import task, Flow, case, agent
 from datetime import datetime, timedelta
 import os
+import errno
+import numpy as np
 import fsspec
 import zarr
 from rechunker import rechunk
@@ -42,9 +44,26 @@ def list_all_files_to_fetch(short_name_variables):
 def save_unique_variable_date_file(filename):
 
     path = 'tmp/data'
-    fs = fsspec.filesystem('s3', **Config.STORAGE_OPTIONS)
-    fs.download(os.path.join(Config.BUCKET, filename),
-                os.path.join(path, filename))
+
+    try:
+        fs = fsspec.filesystem('s3', **Config.STORAGE_OPTIONS)
+        fs.download(os.path.join(Config.BUCKET, filename),
+                    os.path.join(path, filename))
+    except FileNotFoundError:
+        filename_list = filename.split('_')
+        date_str = filename_list[0]
+        variable = filename_list[1]
+        times = pd.date_range(date_str, periods=24, freq='h')
+        longitude = np.arange(0.0, 360, 0.25)
+        latitude = np.arange(90, -90 - 0.25, -0.25)
+
+        data = np.full([times.size, latitude.size, longitude.size], np.nan).astype(np.float32)
+
+        da = xr.DataArray(data,
+                          coords=[times, latitude, longitude],
+                          dims=["time", "latitude", "longitude"]).rename(variable.lower())
+        ds = da.to_dataset()
+        ds.to_netcdf(os.path.join(path, filename))
     return path
 
 
