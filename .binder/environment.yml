@@ -1,3 +1,4 @@
+name: era5-forge
 channels:
  - conda-forge
 dependencies:
