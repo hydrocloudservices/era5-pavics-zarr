@@ -17,4 +17,9 @@ dependencies:
  - scipy
  - zarr
  - cdsapi
+ - python-blosc
+ - cytoolz
+ - lz4
+ - nomkl
+ - tini==0.18.0
 
