@@ -16,10 +16,15 @@ RUN conda install --yes \
     && find /opt/conda/lib/python*/site-packages/bokeh/server/static -type f,l -name '*.js' -not -name '*.min.js' -delete \
     && rm -rf /opt/conda/pkgs
 
+# Create the environment:
+COPY .binder/environment.yml .
+RUN conda env create -f environment.yml
+
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
+
 COPY prepare.sh /usr/bin/prepare.sh
 
 RUN mkdir /opt/app
-
-COPY .binder/environment.yml /opt/app/environment.yml
 
 ENTRYPOINT ["tini", "-g", "--", "/usr/bin/prepare.sh"]
