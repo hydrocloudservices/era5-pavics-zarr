@@ -11,6 +11,11 @@ RUN conda install --yes \
     s3fs \
     rechunker \
     fsspec \
+    h5netcdf \
+    h5py \
+    hdf5 \
+    prefect \
+    rasterio \
     numcodecs \
     zarr \
     netcdf4 \
