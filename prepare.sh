@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 set -x
 
 # We start by adding extra apt packages, since pip modules may required library
