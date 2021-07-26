@@ -10,9 +10,11 @@ dependencies:
  - rechunker
  - fsspec
  - numcodecs
+ - intake-xarray
  - prefect
  - xarray
  - netcdf4
  - scipy
  - zarr
  - cdsapi
+
