@@ -8,6 +8,14 @@ RUN conda install --yes \
     dask==2021.7.1 \
     lz4 \
     nomkl \
+    s3fs \
+    rechunker \
+    fsspec \
+    numcodecs \
+    zarr \
+    netcdf4 \
+    scipy \
+    zarr \
     numpy==1.21.1 \
     pandas==1.3.0 \
     tini==0.18.0 \
