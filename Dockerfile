@@ -32,7 +32,7 @@ RUN conda install --yes \
     && rm -rf /opt/conda/pkgs
 
 RUN /opt/conda/bin/pip install pangeo-forge-recipes
-RUN apt install awscli
+RUN python3 -m pip --no-cache-dir install --upgrade awscli
 
 COPY prepare.sh /usr/bin/prepare.sh
 
