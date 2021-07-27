@@ -36,9 +36,7 @@ aws_secret_access_key = $AWS_SECRET_KEY_ID" > ~/.aws/credentials
 echo "
 [default]
 output=json
-region = $AWS_REGION
-s3 =
-endpoint_url = $AWS_ENDPOINT_URL" > ~/.aws/config
+region = $AWS_REGION" > ~/.aws/config
 
 # Run extra commands
 exec "$@"
