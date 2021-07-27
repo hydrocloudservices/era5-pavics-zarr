@@ -27,5 +27,18 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
+mkdir -p ~/.aws
+touch ~/.aws/credentials
+echo "
+[default]
+aws_access_key_id = $AWS_ACCESS_KEY_ID
+aws_secret_access_key = $AWS_SECRET_KEY_ID" > ~/.aws/credentials
+echo "
+[default]
+output=json
+region = $AWS_REGION
+s3 =
+endpoint_url = $ENDPOINT_URL" > ~/.aws/config
+
 # Run extra commands
 exec "$@"
