@@ -38,7 +38,7 @@ echo "
 output=json
 region = $AWS_REGION
 s3 =
-endpoint_url = $ENDPOINT_URL" > ~/.aws/config
+endpoint_url = $AWS_ENDPOINT_URL" > ~/.aws/config
 
 # Run extra commands
 exec "$@"

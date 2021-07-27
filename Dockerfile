@@ -33,6 +33,7 @@ RUN conda install --yes \
 
 RUN /opt/conda/bin/pip install pangeo-forge-recipes
 RUN python3 -m pip --no-cache-dir install --upgrade awscli
+RUN python3 -m pip --no-cache-dir install --upgrade git+https://github.com/hydrocloudservices/boto3.git
 
 COPY prepare.sh /usr/bin/prepare.sh
 
