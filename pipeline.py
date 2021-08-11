@@ -95,7 +95,7 @@ def chunk_zarr_dataset(variable, source_store):
     target_store = os.path.join('tmp/zarr/current', variable)
     source_group = zarr.open(source_store)
 
-    chunks = {'time': source_group.time.size, 'latitude': 2, 'longitude': 2}
+    chunks = {'time': source_group.time.size, 'latitude': 5, 'longitude': 5}
     target_chunks = {}
     for value in list(source_group.items()):
         if len(value[1].chunks) == 1:
@@ -112,7 +112,11 @@ def chunk_zarr_dataset(variable, source_store):
     # }
     max_mem = '1500MB'
 
-    array_plan = rechunk(source_group, target_chunks, max_mem, target_store)
+    array_plan = rechunk(source_group,
+                         target_chunks=target_chunks,
+                         max_mem=max_mem,
+                         target_store=target_store,
+                         temp_store=temp_store)
     array_plan.execute(retries=100)
     shutil.rmtree(source_store)
     # shutil.rmtree(temp_store)
