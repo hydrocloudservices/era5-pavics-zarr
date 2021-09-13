@@ -19,6 +19,7 @@ jobs:
           auto-activate-base: false
       - shell: bash -l {0}
         run: |
+            sudo apt-get update
             sudo apt install awscli
             mkdir -p ~/.aws
             touch ~/.aws/credentials
