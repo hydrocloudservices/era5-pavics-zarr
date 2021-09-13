@@ -1,8 +1,9 @@
 name: DataOps
 
 on:
-  schedule:
-    - cron: '30 5 * * *'
+  push:
+    branches:
+      - 'master'
 
 jobs:
   run:
