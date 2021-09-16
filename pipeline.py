@@ -74,7 +74,9 @@ def create_current_zarr_dataset(variable, path):
     print(ds)
     ds['longitude'] = (((ds.longitude + 180) % 360) - 180)
     ds = ds.sortby('longitude')
-    ds = ds.unify_chunks()
+    for var in ds.variables:
+        if not var in ds.coords:
+            ds[var] = ds[var].astype('float32')
 
     print('Saving to zarr...')
     output_path = os.path.join('tmp/zarr/source',variable)
