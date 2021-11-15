@@ -5,7 +5,7 @@ on:
     - cron: '30 5 * * *'
 
 jobs:
-  run:
+  cronjob-based-github-action:
 
     name: Hydat-Forge Data Pipeline
     runs-on: ubuntu-latest
@@ -38,3 +38,4 @@ jobs:
             " > ~/.cdsapirc
 
             python pipeline.py
+      - uses: gautamkrishnar/keepalive-workflow@master # using the workflow with default settings
