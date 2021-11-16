@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 import os
 
-END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=5))
-
+#END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=5))
+END_DATE_DATETIME = datetime(2021, 10, 6, 15, 00) - timedelta(days=5)
 
 class Config(object):
     # Bucket configuration
@@ -21,8 +21,11 @@ class Config(object):
     # Dataset
     BATCH_IMPORT_DAYS = ['06Jan', '06Apr','06Jul','06Oct']
 
-    DATETIME_NOW = datetime.utcnow()
-    END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=6))
+    #DATETIME_NOW = datetime.utcnow()
+    DATETIME_NOW = datetime(2021, 10, 6, 15, 00)
+    #END_DATE_DATETIME = (datetime.utcnow()- timedelta(days=6))
+    END_DATE_DATETIME = (datetime(2021, 10, 6, 15, 00)  - timedelta(days=6))
+
     print(END_DATE_DATETIME)
     END_DATE = END_DATE_DATETIME.strftime('%Y-%m-%d')
     BUCKET_ZARR_CURENT = os.path.join('s3://era5/world/reanalysis/single-levels/zarr-time-cache', END_DATE)
@@ -36,7 +39,8 @@ class Config(object):
         start_dates.append(date)
     dates_list = [10000 if i <= 0 else i for i in [(END_DATE_DATETIME - (start_date - timedelta(days=6))).days
                                                    for start_date in start_dates]]
-    index = dates_list.index(min(dates_list))
+    #index = dates_list.index(min(dates_list))
+    index = 2
     START_DATE_ZARR = (start_dates[index] - timedelta(days=5)).strftime('%Y-%m-%d')
     print(START_DATE_ZARR)
     print(END_DATE)
