@@ -1,7 +1,8 @@
 name: DataOps
 
 on:
-  push:
+  schedule:
+    - cron: '30 5 * * *'
 
 jobs:
   cronjob-based-github-action:
