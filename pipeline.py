@@ -72,8 +72,7 @@ def create_current_zarr_dataset(variable, path):
 
     ds = xr.open_mfdataset(os.path.join(path,'*.nc'))
     print(ds)
-    ds['longitude'] = (((ds.longitude + 180) % 360) - 180)
-    ds = ds.sortby('longitude')
+    ds = ds.assign_coords({"longitude": (((ds.longitude + 180) % 360) - 180)})
     for var in ds.variables:
         if not var in ds.coords:
             ds[var] = ds[var].astype('float32')
